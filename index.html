@@ -114,7 +114,7 @@
 				pathElements[index].textContent = path;
 			}
 
-			if(window.location.href.startsWith("http://localhost:")){
+			if(window.location.href.startsWith("http://localhost:") || window.location.href.includes("github.io/pixlus")){
 				window.location.href = "web/"
 			}
 			if(window.location.href.includes(".zip")){
