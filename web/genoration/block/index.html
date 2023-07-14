@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			body {
+				font-family: sans-serif;
+			}
+			div {
+				margin-left: 10px;
+				background-color: rgba(127.5, 127.5, 127.5, 0.2);
+				padding: 10px;
+				border-radius: 5px;
+			}
+			div#genorate {
+				width: 50%;
+			}
+			div * {
+				display: block;
+				margin: 5px;
+			}
+			div#generatedData {
+				white-space: pre;
+				width: calc( 50% - 70px );
+				float: right;
+				position: absolute;
+				top: 5rem;
+   				right: 10px;
+				font-weight: bold;
+			}
+			div#generatedData:before {
+				content: "[ CTRL + S ] to copy data";
+				position: relative;
+				display: block;
+				top: 0px;
+				left: 0px;
+				padding: 5px;
+				background-color: rgba(127.5, 127.5, 127.5, 0.4);
+				border-radius: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Block Genorator</h1>
+		
+		<div id="genorate">
+			<input id="name" type="text" placeholder="Block Name">
+			<input id="variant" type="text" placeholder="Block Variant (optional)">
+			<div>
+				<p>Image</p>
+				<div>
+					<input id="source" type="text" placeholder="Block Image Source">
+					<input id="width" type="number" placeholder="Block Width">
+					<input id="height" type="number" placeholder="Block Height">
+				</div>
+				<p>Aspects</p>
+				<div>
+					<code>I wonder what will be here?</code>
+				</div>
+			</div>
+		</div>
+
+		<br>
+
+		<div id="generatedData"><p>Generated data will be shown here</p></div>
+
+		<script>
+			document.getElementById("genorate").oninput = generate;
+			window.onload = generate;
+			function generate(){
+				let name = document.getElementById("name").value.toLowerCase().replaceAll(" ", "_");
+				let variant = document.getElementById("variant").value.toLowerCase().replaceAll(" ", "_");
+				if(variant !== ""){
+					variant = ":"+variant
+				}
+				let source = document.getElementById("source").value.toLowerCase().replaceAll(" ", "_");
+				let width = document.getElementById("width").value.toLowerCase().replaceAll(" ", "_");
+				let height = document.getElementById("height").value.toLowerCase().replaceAll(" ", "_");
+				let generationData = `{
+					"${name || "block_name" }${variant}": {
+						"img": {
+							"source": "${source || "block_image_path.png" }",
+							"width": ${eval(width) || 16 },
+							"height": ${eval(height) || 16 }
+						},
+						"aspects": {
+							
+						}
+					}
+				}`;
+				generationData = JSON.parse(generationData);
+				let generatedStringData = JSON.stringify(generationData, null, 5);
+				document.getElementById("generatedData").innerText = generatedStringData;
+			}
+			document.addEventListener('keydown', e => {
+				if (e.ctrlKey && e.key === 's') {
+					// Prevent the Save dialog to open
+					e.preventDefault();
+					// Copy generated data to clipboard
+					navigator.clipboard.writeText(document.getElementById("generatedData").innerText);
+
+				}
+			});
+		</script>
+	</body>
+</html>

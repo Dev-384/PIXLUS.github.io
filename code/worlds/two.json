@@ -1,0 +1,6 @@
+{
+	"world": [
+		["grass_block:top-left", "grass_block:top", "grass_block:top-right"],
+		["grass_block:center-left", "grass_block:center", "grass_block:center-right"]
+	]
+}

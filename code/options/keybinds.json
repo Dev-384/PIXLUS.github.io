@@ -1,0 +1,26 @@
+{
+	"keybinds": {
+		"movement": {
+			"up": "w",
+			"left": "a",
+			"down": "s",
+			"right": "d"
+		},
+		"menu": {
+			"open": "escape",
+			"close": "escape"
+		},
+		"inventory": {
+			"open": "e",
+			"drop": "q",
+
+			"selectedItem": {
+				"slot:1": "1",
+				"slot:2": "2",
+				"slot:3": "3",
+				"slot:4": "4",
+				"slot:5": "5"
+			}
+		}
+	}
+}

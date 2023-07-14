@@ -1,0 +1,121 @@
+/* Home Page Styles */
+
+@font-face {
+    font-family: PIXLUS_black-white;
+    src: url("../../code/assets/UI/images/fonts/Pixlus_black_white-Regular.ttf");
+	/* text-transform: uppercase; */
+}
+
+body {
+	font-family: PIXLUS_black-white;
+	background: #7a8ba1;
+}
+
+* {
+	cursor: url(../../code/assets/cursor/default.png) 10 0, pointer;
+}
+*:active {
+	cursor: url(../../code/assets/cursor/pointer.png) 10 7, pointer;
+}
+
+h1 {
+	display: block;
+	text-align: center;
+}
+
+a[href], button {
+	font-family: PIXLUS_black-white;
+	font-size: xx-large;
+	text-decoration: none;
+	color: #333333;
+	background-color: #7a8ba1;
+	border: none;
+	box-shadow:
+		0px 5px 0px 0px #333333,
+		0px -5px 0px 0px #333333,
+		5px 0px 0px 0px #333333,
+		-5px 0px 0px 0px #333333,
+		inset -5px -5px 0px 0px #576372;
+	transition: background-color 1s, box-shadow 1s;
+	padding: 10px 50px;
+
+	&:hover {
+		background-color: #f2f2f0;
+		box-shadow:
+			0px 5px 0px 0px #333333,
+			0px -5px 0px 0px #333333,
+			5px 0px 0px 0px #333333,
+			-5px 0px 0px 0px #333333,
+			inset -5px -5px 0px 0px #b8b8ad;
+	}
+
+	&#play {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+		margin-top: 50px;
+	}
+}
+
+#ground {
+	--size: calc( 100vw / 3 );
+
+	display: inline-block;
+	position: fixed;
+	background-image: url(../../code/assets/blocks/images/Grass/Top/center.png);
+	background-size: contain;
+	background-repeat: no-repeat;
+	image-rendering: pixelated;
+	width: var(--size);
+	height: var(--size);
+	bottom: calc(-1 * var(--size) / 2);
+	left: calc(50vw - var(--size)/2);
+	z-index: -1000;
+	animation: ground-in 1s forwards;
+
+	&:before {
+		content: "";
+		display: block;
+		position: relative;
+		left: -100%;
+		background-image: url(../../code/assets/blocks/images/Grass/Top/left.png);
+		background-size: contain;
+		background-repeat: no-repeat;
+		image-rendering: pixelated;
+		width: 100%;
+		aspect-ratio: 1 / 1;
+	}
+
+	&:after {
+		content: "";
+		display: block;
+		position: relative;
+		top: -100%;
+		right: -100%;
+		background-image: url(../../code/assets/blocks/images/Grass/Top/right.png);
+		background-size: contain;
+		background-repeat: no-repeat;
+		image-rendering: pixelated;
+		width: 100%;
+		aspect-ratio: 1 / 1;
+	}
+}
+
+@keyframes h1-in {
+	from {
+		text-shadow: 0px 0px 10px white;
+		letter-spacing: 50px;
+	}
+	75% {
+		letter-spacing: -5px;
+	}
+	to {
+		letter-spacing: 0px;
+	}
+}
+
+@keyframes ground-in {
+	from {
+		bottom: calc(-1 * var(--size));
+	}
+}

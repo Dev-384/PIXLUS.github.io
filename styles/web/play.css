@@ -1,0 +1,24 @@
+html, body {
+	height: 100%;
+	width: 100%;
+	margin: 0px;
+	padding: 0px;
+	overflow: hidden;
+}
+
+canvas#screen {
+	position: relative;
+	background-color: #7a8ba1;
+	left: 0px;
+	top: 0px;
+	width: 100vw;
+	height: 100vh;
+	image-rendering: pixelated;
+}
+
+canvas#screen {
+	cursor: url(../../code/assets/cursor/default.png) 10 0, pointer;
+}
+canvas#screen:active {
+	cursor: url(../../code/assets/cursor/pointer.png) 10 7, pointer;
+}
