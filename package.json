@@ -1,0 +1,15 @@
+{
+	"name": "pixlus",
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"dependencies": "cls && npm install && cls",
+		"all": "npm run dependencies && npm run server",
+		"server": "cls && node server.cjs"
+	},
+	"dependencies": {
+		"express": "^4.18.2",
+		"filer": "^1.4.1",
+		"kill-port": "^2.0.1"
+	}
+}
