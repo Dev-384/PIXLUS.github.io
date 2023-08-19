@@ -1,0 +1,27 @@
+{
+	"block": {
+		"": {
+			"img": {
+				"source": [
+					"Chest/0.png",
+					"Chest/1.png",
+					"Chest/2.png",
+					"Chest/3.png",
+					"Chest/4.png",
+					"Chest/5.png",
+					"Chest/6.png",
+					"Chest/7.png"
+				],
+				"width": 16,
+				"height": 16
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","O"],
+					["O","O","O"],
+					["O","O","O"]
+				]
+			}
+		}
+	}
+}

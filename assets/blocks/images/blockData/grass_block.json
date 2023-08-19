@@ -1,0 +1,172 @@
+{
+	"block": {
+		"": {
+			"img": {
+				"source": "Grass/Center/center.png",
+				"width": 16,
+				"height": 16
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","O"],
+					["O","O","O"],
+					["O","O","O"]
+				]
+			}
+		},
+		"slope-down": {
+			"img": {
+				"source": "Grass/Path/Thin/down.png",
+				"width": 16,
+				"height": 16
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","O"],
+					["O","O","O"],
+					["O","O","O"]
+				]
+			}
+		},
+		"slope-up": {
+			"img": {
+				"source": "Rounded_Grass/Path/Thin/up.png",
+				"width": 16,
+				"height": 16
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","O"],
+					["O","O","O"],
+					["O","O","O"]
+				]
+			}
+		},
+		"top-left": {
+			"img": {
+				"source": "Grass/Top/left.png",
+				"width": 16,
+				"height": 16
+			},
+			"aspects": {
+				"bounds": [
+					["X","X","X"],
+					["X","O","O"],
+					["X","O","O"]
+				]
+			}
+		},
+		"top": {
+			"img": {
+				"source": "Grass/Top/center.png",
+				"width": 16,
+				"height": 16
+			},
+			"aspects": {
+				"bounds": [
+					["X","X","X"],
+					["O","O","O"],
+					["O","O","O"]
+				]
+			}
+		},
+		"top-right": {
+			"img": {
+				"source": "Grass/Top/right.png",
+				"width": 16,
+				"height": 16
+			},
+			"aspects": {
+				"bounds": [
+					["X","X","X"],
+					["O","O","X"],
+					["O","O","X"]
+				]
+			}
+		},
+		"center-left": {
+			"img": {
+				"source": "Grass/Center/left.png",
+				"width": 16,
+				"height": 16
+			},
+			"aspects": {
+				"bounds": [
+					["X","O","O"],
+					["X","O","O"],
+					["X","O","O"]
+				]
+			}
+		},
+		"center": {
+			"img": {
+				"source": "Grass/Center/center.png",
+				"width": 16,
+				"height": 16
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","O"],
+					["O","O","O"],
+					["O","O","O"]
+				]
+			}
+		},
+		"center-right": {
+			"img": {
+				"source": "Grass/Center/right.png",
+				"width": 16,
+				"height": 16
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","X"],
+					["O","O","X"],
+					["O","O","X"]
+				]
+			}
+		},
+		"bottom-left": {
+			"img": {
+				"source": "Grass/Bottom/left.png",
+				"width": 16,
+				"height": 16
+			},
+			"aspects": {
+				"bounds": [
+					["X","O","O"],
+					["X","X","X"],
+					["X","X","X"]
+				]
+			}
+		},
+		"bottom": {
+			"img": {
+				"source": "Grass/Bottom/center.png",
+				"width": 16,
+				"height": 16
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","O"],
+					["X","X","X"],
+					["X","X","X"]
+				]
+			}
+		},
+		"bottom-right": {
+			"img": {
+				"source": "Grass/Bottom/right.png",
+				"width": 16,
+				"height": 16
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","X"],
+					["X","X","X"],
+					["X","X","X"]
+				]
+			}
+		}
+	}
+}
