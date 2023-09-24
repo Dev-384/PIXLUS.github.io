@@ -1,0 +1,51 @@
+{
+	"elements": {
+		"paused": [
+
+			{"type": "background",
+				"img": {
+					"source": "/blocks/images/Grass/Center/center.png"
+				}
+			},
+
+			{"type": "image",
+				"img": {
+					"source": "/player/images/walk.gif",
+					"width": 50,
+					"height": 50,
+					"position": {
+						"X": 50,
+						"Y": 50
+					}
+				}
+			},
+
+			{"type": "button",
+				"content": "Continue",
+
+				"onclick": "game.unpause()",
+
+				"display": {
+					"position": {
+						"X": 0,
+						"Y": 0
+					},
+					"width": 50,
+					"height": 25
+				}
+			}
+		],
+		"rightClick": [
+			{"type": "rectangle",
+				"position": {
+					"X": "cursor.x",
+					"Y": "cursor.y"
+				},
+				"size": {
+					"width": 50,
+					"height": 50
+				}
+			}
+		]
+	}
+}

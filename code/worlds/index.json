@@ -1,0 +1,12 @@
+{
+	"worlds": [
+		{
+			"title": "One",
+			"path": "worldData/one.json"
+		},
+		{
+			"title": "Two",
+			"path": "worldData/two.json"
+		}
+	]
+}

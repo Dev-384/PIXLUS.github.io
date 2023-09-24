@@ -1,0 +1,13 @@
+{
+     "name": "pixlus",
+     "description": "Welcome to the world of PIXLUS",
+     "version": "0.0.7",
+     "scripts": {
+          "main": "npm install && npm run server",
+          "server": "node server.js",
+          "logs": "node server/logs.js"
+     },
+     "dependencies": {
+          "express": "^4.18.2"
+     }
+}

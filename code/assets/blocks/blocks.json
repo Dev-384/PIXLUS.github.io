@@ -1,0 +1,13 @@
+{
+	"types": {
+		"grass_block": "blockData/grass_block.json",
+		"dirt": "blockData/dirt.json",
+		"water": "blockData/water.json",
+		"campfire": "blockData/campfire.json",
+		"chest": "blockData/chest.json",
+		"tree": "blockData/tree.json",
+		"home": "blockData/home.json",
+		"portal": "blockData/portal.json",
+		"bridge": "blockData/bridge.json"
+	}
+}
