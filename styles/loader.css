@@ -11,14 +11,16 @@
 	* 
 	*/
 
+	image-rendering: pixelated;
+	-webkit-user-drag: none;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	pointer-events: none;
 	font-family: PIXLUS_black-white;
 
 	&.loader {
-		-webkit-user-drag: none;
-		user-select: none;
-		-moz-user-select: none;
-		-webkit-user-select: none;
-		-ms-user-select: none;
 
 		--loader-animation-length: 1s;
 		display: flex;
@@ -38,7 +40,6 @@
 			position: relative;
 			background-image: url("../code/assets/player/images/walk.gif");
 			background-repeat: no-repeat;
-			image-rendering: pixelated;
 			background-size: contain;
 			background-position: center center;
 			margin-bottom: 5vh;
@@ -46,10 +47,10 @@
 			aspect-ratio: 1 / 1;
 		}
 		&[active]>.dot {
-			animation: loader-dot-in var(--loader-animation-length);
+			animation: loader-dot-in var(--loader-animation-length) forwards;
 		}
 		&:not([active]) {
-			animation: loader-allout var(--loader-animation-length);
+			animation: loader-allout var(--loader-animation-length) forwards;
 		}
 		&:not([active])>.dot {
 			animation: loader-dot-out var(--loader-animation-length) forwards;
@@ -62,10 +63,10 @@
 				linear-gradient(to bottom, transparent 20%, #7a8ba1),
 				url(../code/assets/blocks/images/Grass/Top/center.png);
 			background-size: contain;
-			image-rendering: pixelated;
 			width: 10vw;
 			height: 10vw;
 			aspect-ratio: 1 / 1;
+			animation: 1s loader-line-in forwards;
 
 			&::before {
 				content: "";
@@ -76,7 +77,6 @@
 				linear-gradient(to bottom, transparent 20%, rgb(122, 139, 161)),
 				url(../code/assets/blocks/images/Grass/Top/left.png);
 				background-size: contain;
-				image-rendering: pixelated;
 				width: 100%;
 				aspect-ratio: 1 / 1;
 			}
@@ -91,26 +91,20 @@
 				linear-gradient(to bottom, transparent 20%, rgb(122, 139, 161)),
 				url(../code/assets/blocks/images/Grass/Top/right.png);
 				background-size: contain;
-				image-rendering: pixelated;
 				width: 100%;
 				aspect-ratio: 1 / 1;
 			}
 		}
 		&>.message {
-			position: relative;
-			top: -10vh;
+			position: absolute;
+			top: 55vh;
 			font-size: 2.99vw;
 			text-align: center;
-		}
-	}
-}
 
-@keyframes loader-line {
-	from, to {
-		width: 10%;
-	}
-	50% {
-		width: 15%;
+			&>h1>img {
+				width: calc( (10vw * 3) / var(--character-length) );
+			}
+		}
 	}
 }
 @keyframes loader-dot-in {
@@ -123,6 +117,14 @@
 	to {
 		transform: translateX(20vw);
 		opacity: 0;
+	}
+}
+@keyframes loader-line-in {
+	from {
+		opacity: 0;
+	}
+	from {
+		opacity: 1;
 	}
 }
 @keyframes loader-allout {

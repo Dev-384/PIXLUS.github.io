@@ -3,13 +3,45 @@
 	<head>
 		<title>PIXLUS | Home</title>
 		<link rel="stylesheet" href="../styles/web/index.css">
+
+		<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
 	</head>
 
 	<body>
 
-		<h1>PIXLUS</h1>
-		<button id="play" onclick="window.location='./play/'">Play</button>
+		<h1 class="title text">PIXLUS</h1>
+		<a class="text" id="play" onclick>Play</a>
 
 		<div id="ground"></div>
+
+		<div class="content">
+			<img src="../code/assets/videos/play.gif" style=" width: var(--block-size); right: 0px; position: absolute; ">
+			<h1 class="text" style="width: calc(100vw - var(--block-size)*1.2);">
+				This is PIXLUS
+			</h1>
+			<p style="scale: 0.75;">
+				So this is PIXLUS, huh!
+				<br>
+					A world where...
+				<br>
+					Hold on. I can't seem to remember...
+				<br>
+					What happened? I can't remember anything?!
+				<br>
+				<br>
+					What is this place?	
+			</p>
+			<a class="text" id="download">Download Latest Version</a>
+
+			<img src="../code/assets/logo.png">
+
+			<a class="text" href="./credits/">Credits</a>
+
+		</div>
+
+		<!-- <script defer src="../code/pages/web_fonts.js" type="module"></script> -->
+		<script src="../code/pages/home.js" type="module"></script>
 	</body>
 </html>

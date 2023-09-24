@@ -6,6 +6,19 @@
 				"width": 16,
 				"height": 16
 			}
+		},
+		"indicators": {
+			"blocks": {
+				"action": {
+					"source": [
+						"block_action/0.png",
+						"block_action/0.png",
+						"block_action/1.png"
+					],
+					"width": 16,
+					"height": 16
+				}
+			}
 		}
 	},
 
@@ -198,6 +211,27 @@
 			"…": {
 				"img": {
 					"source": "icons/ellipsis.png",
+					"width": 16,
+					"height": 16
+				}
+			},
+			"_": {
+				"img": {
+					"source": "icons/underscore.png",
+					"width": 16,
+					"height": 16
+				}
+			},
+			"~": {
+				"img": {
+					"source": "icons/tilde.png",
+					"width": 16,
+					"height": 16
+				}
+			},
+			" ": {
+				"img": {
+					"source": "icons/space.png",
 					"width": 16,
 					"height": 16
 				}

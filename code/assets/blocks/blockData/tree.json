@@ -1,0 +1,162 @@
+{
+	"block": {
+		"": {
+			"img": {
+				"source": "Nature/Trees/stump/main.png",
+				"width": 16,
+				"height": 16
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","O"],
+					["X","X","X"],
+					["X","X","X"]
+				]
+			}
+		},
+		"stump": {
+			"img": {
+				"source": "Nature/Trees/stump/main.png",
+				"width": 16,
+				"height": 16,
+				"tileCoords": {
+					"X": 0,
+					"Y": 0
+				}
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","O"],
+					["X","X","X"],
+					["X","X","X"]
+				]
+			}
+		},
+		"stump-withaxe": {
+			"img": {
+				"source": "Nature/Trees/stump/with_axe.png",
+				"width": 16,
+				"height": 16,
+				"tileCoords": {
+					"X": 0,
+					"Y": 0
+				}
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","O"],
+					["X","X","X"],
+					["X","X","X"]
+				]
+			}
+		},
+		"green-top-left": {
+			"img": {
+				"source": "Nature/Trees/green/top/left.png",
+				"width": 16,
+				"height": 16,
+				"tileCoords": {
+					"X": 0,
+					"Y": 0
+				}
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","O"],
+					["O","O","O"],
+					["O","O","O"]
+				]
+			}
+		},
+		"green-top-right": {
+			"img": {
+				"source": "Nature/Trees/green/top/right.png",
+				"width": 16,
+				"height": 16,
+				"tileCoords": {
+					"X": 0,
+					"Y": 0
+				}
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","O"],
+					["O","O","O"],
+					["O","O","O"]
+				]
+			}
+		},
+		"green-center-left": {
+			"img": {
+				"source": "Nature/Trees/green/center/left.png",
+				"width": 16,
+				"height": 16,
+				"tileCoords": {
+					"X": 0,
+					"Y": 0
+				}
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","O"],
+					["O","O","O"],
+					["O","O","O"]
+				]
+			}
+		},
+		"green-center-right": {
+			"img": {
+				"source": "Nature/Trees/green/center/right.png",
+				"width": 16,
+				"height": 16,
+				"tileCoords": {
+					"X": 0,
+					"Y": 0
+				}
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","O"],
+					["O","O","O"],
+					["O","O","O"]
+				]
+			}
+		},
+		"green-bottom-left": {
+			"img": {
+				"source": "Nature/Trees/green/bottom/left.png",
+				"width": 16,
+				"height": 16,
+				"tileCoords": {
+					"X": 0,
+					"Y": 0
+				}
+			},
+			"aspects": {
+				"bounds": [
+					["O","X","X"],
+					["O","X","X"],
+					["O","X","X"]
+				]
+			}
+		},
+		"green-bottom-right": {
+			"img": {
+				"source": "Nature/Trees/green/bottom/right.png",
+				"width": 16,
+				"height": 16,
+				"tileCoords": {
+					"X": 0,
+					"Y": 0
+				}
+			},
+			"aspects": {
+				"bounds": [
+					["X","X","O"],
+					["X","X","O"],
+					["X","X","O"]
+				]
+			}
+		}
+	}
+}

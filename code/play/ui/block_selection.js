@@ -1,16 +1,11 @@
 import { MousePositions } from "../behind/keyboard.js";
 import UI from "../../assets/UI/ui.json" assert {type: "json"}
 import { PlayerPositions } from "../player/movement.js";
-import { text, icon } from "./fonts.js";
 import { currentEditingLayer } from "../behind/world_editor.js";
-import { currentScale } from "../main.js";
 import worlds from "../../worlds/index.json" assert {type: "json"};
 
-import pixlus_package from "../../../package.json" assert {type: "json"};
+import { image } from "../preload/assets.js";
 
-const ui = UI.UI;
-
-var blockScale = 1;
 export var selectedBlockX;
 export var selectedBlockY;
 export var selectedBlock = {
@@ -25,18 +20,18 @@ export async function blockSelecter(canvas=HTMLCanvasElement, worldNumber=0){
 
 	let selectedBlockX = Math.floor(
 		(
-			(MousePositions.X + (PlayerPositions.X * currentScale) - canvas.width / 2)
-		) / (16 * currentScale)
+			(MousePositions.X + (PlayerPositions.X ) - canvas.width / 2)
+		) / (16 )
 	);
 
 	let selectedBlockY = Math.floor(
 		(
-			(MousePositions.Y + (PlayerPositions.Y * currentScale) - canvas.height / 2)
-		) / (16 * currentScale)
+			(MousePositions.Y + (PlayerPositions.Y ) - canvas.height / 2)
+		) / (16 )
 	);
-	let currentWorld = localStorage.getItem(`world.${worlds.worlds[worldNumber]}`);
+	let currentWorld = localStorage.getItem(`world.${worlds.worlds[worldNumber].title}`);
 	currentWorld = JSON.parse(currentWorld);
-	currentWorld = currentWorld.default.world;
+	currentWorld = currentWorld.world;
 
 	selectedBlock.position.X = selectedBlockX;
 	selectedBlock.position.Y = selectedBlockY;
@@ -56,32 +51,18 @@ export async function blockSelecter(canvas=HTMLCanvasElement, worldNumber=0){
 		selectedBlock.block = "air";
 	}
 
-	let imagePositionX = (selectedBlockX * 16 * currentScale) - (PlayerPositions.X * currentScale) + canvas.width / 2;
-	let imagePositionY = (selectedBlockY * 16 * currentScale) - (PlayerPositions.Y * currentScale) + canvas.height / 2;
+	let imagePositionX = (selectedBlockX * 16 ) - (PlayerPositions.X ) + canvas.width / 2;
+	let imagePositionY = (selectedBlockY * 16 ) - (PlayerPositions.Y ) + canvas.height / 2;
 
 	image(
-		ui.blockSelection.img.source,
+		`../../code/assets/UI/images/${UI.UI.blockSelection.img.source}`,
 
 		imagePositionX,
 		imagePositionY,
 
-		16 * currentScale,
-		16 * currentScale,
+		16 ,
+		16 ,
 
 		canvas
 	);
-
-	let numberScale = 16 * currentScale;
-	text(`${pixlus_package.name}\nV${pixlus_package.version}`, 0, 0, numberScale, canvas);
-}
-
-function image(img="",x=0,y=0,width=0,height=0, canvas){
-	let context = canvas.getContext("2d");
-	let myImage = document.createElement('img');
-	context.globalAlpha = 1;
-	context.shadowBlur = 20;
-	myImage.src = `../../code/assets/UI/images/${img}`;
-	context.drawImage(myImage, x, y, width,height);
-	context.stroke();
-	myImage.remove();
 }

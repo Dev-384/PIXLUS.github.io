@@ -1,51 +1,77 @@
-import { StartKeyboardTracker, keysPressed } from "../behind/keyboard.js";
-import options from "../../options/keybinds.json" assert {type: "json"};
+import { UI_options } from "../main.js";
+
+import { KeyPressed, keybinds, keysPressed } from "../behind/keyboard.js";
 import worlds from "../../worlds/index.json" assert {type: "json"};
-import blocks from "../../assets/blocks/blocks.json" assert {type: "json"};
-import { worldNumber } from "../main.js";
+import { CashedBlockData } from "../render.js";
+
+import reloadWorlds from "../../worlds/reload.js";
+reloadWorlds();
 
 export var PlayerPositions = {
-	X: JSON.parse(localStorage.getItem(`world.${worlds.worlds[worldNumber || 0]}`)).default.spawnpoint.X * 16 + 16/2,
-	Y: JSON.parse(localStorage.getItem(`world.${worlds.worlds[worldNumber || 0]}`)).default.spawnpoint.Y * 16 + 16
+	X: JSON.parse(
+		localStorage.getItem(`world.${worlds.worlds[
+			JSON.parse(localStorage.getItem("worldNumber"))
+		]?.title}`) ||
+		JSON.stringify({spawnpoint: {X: 0}})
+	).spawnpoint.X * 16 + 16/2,
+
+	Y: JSON.parse(
+		localStorage.getItem(`world.${worlds.worlds[
+			JSON.parse(localStorage.getItem("worldNumber"))
+		]?.title}`) ||
+		JSON.stringify({spawnpoint: {Y: 0}})
+	).spawnpoint.Y * 16 + 16
 }
 
-export var PlayerAnimationStyle = "walk";
+export var PlayerAnimationStyle = "idle";
 export var PlayerAnimationDirection = "right";
 
 var speed = 0;
 
-function ReloadPlayerMovement(scale=1, canvas=HTMLCanvasElement){
-	let keybinds = options.keybinds;
+export async function ReloadPlayerMovement(){
 
-	StartKeyboardTracker();
+	if(UI_options.currentMenu !== "") return undefined
 
-	let keyUp = keysPressed.includes(keybinds.movement.up);
-	let keyDown = keysPressed.includes(keybinds.movement.down);
-	let keyLeft = keysPressed.includes(keybinds.movement.left);
-	let keyRight = keysPressed.includes(keybinds.movement.right);
+	let keyUp = keybinds.movement.up;
+	let keyDown = keybinds.movement.down;
+	let keyLeft = keybinds.movement.left;
+	let keyRight = keybinds.movement.right;
 
 	let ControlKey = keysPressed.includes("Control");
 
-	if( (keyUp || keyDown || keyLeft || keyRight) == true && ControlKey == false){
-		updateSpeed();
-		PlayerAnimationStyle = "walk";
-		if(keyUp){
-			PlayerPositions.Y -= Math.round(speed);
-			fixCollisions("up");
-		}
-		if(keyDown){
-			PlayerPositions.Y += Math.round(speed);
-			fixCollisions("down");
-		}
-		if(keyLeft){
-			PlayerPositions.X -= Math.round(speed);
-			PlayerAnimationDirection = "left";
-			fixCollisions("left");
-		}
-		if(keyRight){
-			PlayerPositions.X += Math.round(speed);
-			PlayerAnimationDirection = "right";
-			fixCollisions("right");
+	if( (KeyPressed(keyUp) || KeyPressed(keyDown) || KeyPressed(keyLeft) || KeyPressed(keyRight)) == true && ControlKey == false){
+
+		if((
+			( KeyPressed(keyUp) && KeyPressed(keyDown) ) ||
+			( KeyPressed(keyLeft) && KeyPressed(keyRight) )
+		) == false){
+			speed = 2;
+			PlayerAnimationStyle = "walk";
+			if(KeyPressed(keyUp)){
+				PlayerPositions.Y -= Math.round(speed);
+				fixCollisions("up");
+			}
+			if(KeyPressed(keyDown)){
+				PlayerPositions.Y += Math.round(speed);
+				fixCollisions("down");
+			}
+			if(KeyPressed(keyLeft)){
+				PlayerPositions.X -= Math.round(speed);
+				if(KeyPressed(keyRight) == false){
+					PlayerAnimationDirection = "left";
+				}
+				fixCollisions("left");
+			}
+			if(KeyPressed(keyRight)){
+				PlayerPositions.X += Math.round(speed);
+				if(KeyPressed(keyLeft) == false){
+					PlayerAnimationDirection = "right";
+				}
+				fixCollisions("right");
+			}
+		}else{
+			speed = 0;
+			PlayerAnimationStyle = "idle";
 		}
 	}else{
 		speed = 0;
@@ -53,34 +79,26 @@ function ReloadPlayerMovement(scale=1, canvas=HTMLCanvasElement){
 	}
 }
 
-setInterval(ReloadPlayerMovement, 100);
-
-function updateSpeed(){
-	let maxSpeed = 4;
-	if(speed < maxSpeed){
-		speed += (Math.round(speed) || 0.4) * 1.5;
-	}else{
-		speed = maxSpeed;
-	}
-}
-
 export function PlayerMoveByBlock(blockX, blockY){
 	PlayerPositions.X += blockX * 16;
 	PlayerPositions.Y += blockY * 16;
 }
+export function PlayerMoveToBlock(blockX, blockY){
+	PlayerPositions.X = blockX * 16 + 16/2;
+	PlayerPositions.Y = blockY * 16 + 16;
+}
 
 function currentStandingBlocks(){
-	let world = JSON.parse(localStorage.getItem(`world.${worlds.worlds[worldNumber || 0]}`)).default;
+	let world = JSON.parse(localStorage.getItem(`world.One`));
 
 	let blockY = Math.floor(PlayerPositions.Y / 16);
 	let blockX = Math.floor(PlayerPositions.X / 16);
 
 	let standingBlocks = [];
-	let numOfLayers = 4;
-	for(let layer = 0; layer < numOfLayers - 1; layer ++){
+	for(let layer = 0; layer < world.world.length; layer ++){
 
-		if(blockY < world.world[layer].length){
-			if(blockX < world.world[layer][blockY].length){
+		if(blockY < world.world[layer].length && blockY > -1){
+			if(blockX < world.world[layer][blockY].length && blockX > -1){
 				standingBlocks[layer] = world.world[layer][blockY][blockX] || "air";
 			}else{
 				standingBlocks[layer] = "air"
@@ -93,55 +111,24 @@ function currentStandingBlocks(){
 	return(standingBlocks);
 }
 
-function findCollisions(direction=""){
-	direction = direction.toLowerCase();
+function foundCollision(layerToCheck=1){
 
-	let layerToCheck = 2;
 	let standingBlock = currentStandingBlocks()[layerToCheck - 1];
 
-	let blockBoundaries = blocks.blocks[standingBlock].aspects.bounds;
-	/**
-	 * 0 0 X
-	 * 0 0 X
-	 * 0 0 X
-	 * 
-	 * * X = SOLID
-	 * * 0 = PASSABLE
-	*/
+	if(standingBlock == "air") return(false);
 
-	let PlayerPositionInsideBlock = {
-		X: Math.floor((PlayerPositions.X % 16) / 5),
-		Y: Math.floor((PlayerPositions.Y % 16) / 5)
-	}
-	let collision = blockBoundaries[PlayerPositionInsideBlock.Y || 0][PlayerPositionInsideBlock.X || 0]
+	let standingBlockBounds = CashedBlockData[standingBlock].aspects.bounds;
 
-	if(collision == "X"){
-		return(true);
-	}else{
-		return(false)
-	}
-}
+	if(standingBlockBounds == undefined) return(false)
 
-function foundCollision(layerToCheck=2){
-	let standingBlock = currentStandingBlocks()[layerToCheck - 1];
 
-	let blockBoundaries = blocks.blocks[standingBlock].aspects.bounds;
-	/**
-	 * 0 0 X
-	 * 0 0 X
-	 * 0 0 X
-	 * 
-	 * * X = SOLID
-	 * * 0 = PASSABLE
-	*/
+	let innerBlockX = Math.floor(PlayerPositions.X % 16);
+	let innerBlockY = Math.floor(PlayerPositions.Y % 16);
 
-	let PlayerPositionInsideBlock = {
-		X: Math.floor((PlayerPositions.X % 16) / 5),
-		Y: Math.floor((PlayerPositions.Y % 16) / 5)
-	}
-	let collision = blockBoundaries[PlayerPositionInsideBlock.Y || 0][PlayerPositionInsideBlock.X || 0]
+	let innerX = Math.floor(innerBlockX / ( 16 / standingBlockBounds.length ));
+	let innerY = Math.floor(innerBlockY / ( 16 / standingBlockBounds[0].length ));
 
-	if(collision == "X"){
+	if(standingBlockBounds[innerY][innerX] !== "O"){
 		return(true);
 	}else{
 		return(false);
@@ -150,15 +137,23 @@ function foundCollision(layerToCheck=2){
 
 function fixCollisions(direction=""){
 
-	if(foundCollision(1) || foundCollision(2) || foundCollision(3)){
+	direction = direction.toLowerCase();
+
+	while(
+		// foundCollision(1) ||
+		foundCollision(2) ||
+		foundCollision(3)
+	){
 		if(direction == "up"){
-			PlayerPositions.Y += Math.round(speed);
+			PlayerPositions.Y += 1;
 		}else if(direction == "down"){
-			PlayerPositions.Y -= Math.round(speed);
+			PlayerPositions.Y -= 1;
 		}else if(direction == "left"){
-			PlayerPositions.X += Math.round(speed);
+			PlayerPositions.X += 1;
 		}else if(direction == "right"){
-			PlayerPositions.X -= Math.round(speed);
+			PlayerPositions.X -= 1;
+		}else{
+			console.error("The function (fixCollisions) requires the parameter \"direction\" to be UP DOWN LEFT or RIGHzT")
 		}
 	}
 }

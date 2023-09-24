@@ -1,7 +1,10 @@
 <?php
-	// notice this will put WHATEVER is in json into file
-	$filename="config.json";
-	if (isset($_POST["json"])) {
-		file_put_contents($filename, $_POST["json"]);
+	if(!empty($_POST['data'])){
+		$data = $_POST['data'];
+		$fname = mktime() . ".txt";//generates random name
+		
+		$file = fopen("upload/" .$fname, 'w');//creates new file
+		fwrite($file, $data);
+		fclose($file);
 	}
 ?>

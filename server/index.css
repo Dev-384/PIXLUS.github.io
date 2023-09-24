@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Akatab:wght@900&display=swap');
+html, body {
+	background: #7a8ba1;
+}
+* {
+	font-family: 'Akatab', sans-serif;
+}
+.logo {
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	width: 10vw;
+	aspect-ratio: 1 / 1;
+	background-image: url("../code/assets/PIXLUS-logo-large.png");
+	image-rendering: pixelated;
+	background-size: contain;
+	background-position: center center;
+}
+code {
+	font-family: monospace;
+	display: block;
+	background-color: rgba(127.5, 127.5, 127.5, 0.5);
+	white-space: pre-line;
+	padding: 10px;
+	border-radius: 3px;
+
+	&>* {
+		font-family: monospace;
+	}
+
+	&::before {
+		content: attr(type);
+		background-color: #8f8f8f;
+		text-transform: uppercase;
+		position: relative;
+		top: -13px;
+		left: -10px;
+		border-top-left-radius: 3px;
+		border-bottom-right-radius: 3px;
+		padding: 3px;
+		animation: load-codeblock 5s;
+	}
+}
+@keyframes load-codeblock {
+	from {
+		transform: scale(0.5);
+	}
+	to {
+		
+	}
+}
+div.typing {
+	display: inline-block;
+	animation: typing 1s infinite linear;
+	height: 10px;
+	width: 1px;
+	background-color: black;
+}
+@keyframes typing {
+	from, 25%, 75%, to{
+		opacity: 0;
+	}
+	26%, 50%, 74% {
+		opacity: 1;
+	}
+}

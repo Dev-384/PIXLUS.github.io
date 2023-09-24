@@ -1,90 +1,49 @@
-import { showLoader, hideLoader } from "../loader_create.js";
-showLoader("PIXLUS");
-hideLoader();
+import * as game from "./screen/loop.js";
+import reloadWorlds from "../worlds/reload.js";
+import * as loader from "../loader_create.js";
+import last_play from "../../last_play.json" assert {type: "json"};
+let last_play_copy = JSON.parse(JSON.stringify(last_play));
+last_play_copy["CYAN"] = "RED!";
+web_request.writeFile("../../last_play.json", JSON.stringify(last_play_copy, null, 4), window.location.href);
 
-import render from "./rendering/main.js";
-import loadAssets from "./preload/assets.js";
-import play from "../worlds/index.json" assert {type: "json"}
-
-var canvas = document.getElementById("screen");
+await reloadWorlds();
+loader.show("Loading");
 loadAssets();
 
-export var worldNumber = 0;
-export var currentScale = 3;
+import * as web_request from "../../server/web_request.js";
 
+web_request.readFile("last_play.txt", (fileContent) => {
+	console.log(fileContent);
+});
+
+export const startTime = (new Date).getMilliseconds();
+export var canvas = document.getElementById("screen");
+export var innerScreen = document.createElement("canvas");
 export var UI_options = {
-	inPlay: true,
-
 	currentMenu: ""
 };
+export var actualScale = 1;
+export var scale = actualScale / 4;
 
-for(let i = 0; i < play.worlds.length; i++){
-	let currentWorldName = play.worlds[i];
 
-	let currentWorld = await import(`../worlds/${currentWorldName}.json`, {
-		assert: {
-			type: "json",
-		},
-	});
+import gameOptions from "../../options/index.json" assert {type: "json"};
+import { loadAssets } from "./preload/assets.js";
 
-	let stringifiedWorldData = JSON.stringify(currentWorld);
-
-	// if(localStorage.getItem(`world.${currentWorldName}`) == null){
-		localStorage.setItem(`world.${currentWorldName}`, stringifiedWorldData);
-	// }
+if((gameOptions.advanced["show_paused_menu"] !== false)){
+	UI_options.currentMenu = "paused";
 }
 
-async function main(){
+setTimeout( () =>  {
 
-	reloadWorlds().then(async () => {
-		resizeCanvas(canvas);
-	}).then(async () => {
-		await render(canvas.innerScreen);
-	}).then(async () => {
-		canvas.getContext("2d").drawImage(canvas.innerScreen, 0, 0);
-	});
+	game.startLoop();
+	loader.hide();
 
-}
+}, 1000);
 
-window.onload = function(){
-	main();
-	setInterval(main, 100);
-}
-
-window.onresize = function(){
-	main();
-}
-
-function resizeCanvas(canvas=HTMLCanvasElement){
-
-	currentScale = Math.abs(currentScale);
-
-	if(canvas.width !== window.innerWidth){
-		canvas.width = window.innerWidth;
-	}
-	if(canvas.height !== window.innerHeight){
-		canvas.height = window.innerHeight;
-	}
-
-	canvas.innerScreen = document.createElement("canvas");
-	canvas.innerScreen.width = canvas.width;
-	canvas.innerScreen.height = canvas.height;
-}
-
-async function reloadWorlds(){
-	for(let i = 0; i < play.worlds.length; i++){
-		let currentWorldName = play.worlds[i];
-	
-		let currentWorld = await import(`../worlds/${currentWorldName}.json`, {
-			assert: {
-				type: "json",
-			},
-		});
-	
-		let stringifiedWorldData = JSON.stringify(currentWorld);
-	
-		if(localStorage.getItem(`world.${currentWorldName}`) == null){
-			localStorage.setItem(`world.${currentWorldName}`, stringifiedWorldData);
+document.onvisibilitychange = () => {
+	if(gameOptions.advanced.DEVELOPER_MODE !== true){
+		if(UI_options.currentMenu == ""){
+			UI_options.currentMenu = "paused";
 		}
 	}
 }

@@ -1,7 +1,11 @@
+import reloadTexts from "./pages/web_fonts.js";
+
 export var loader = document.createElement("div");
 
-export async function showLoader(message="", delay=1500) {
+export async function show(message="") {
+
 	loader.setAttribute("class", "loader");
+	loader.setAttribute("style", `--character-length: ${message.length};`)
 	loader.setAttribute("active", "");
 	document.body.appendChild(loader);
 	
@@ -15,13 +19,19 @@ export async function showLoader(message="", delay=1500) {
 	
 	let loader_message = document.createElement("div");
 	loader_message.setAttribute("class", "message");
-	loader_message.innerHTML = message;
 	loader.appendChild(loader_message);
+	let loader_message_content = document.createElement("h1");
+	loader_message_content.innerHTML = message;
+	loader_message.appendChild(loader_message_content);
+
+	loader.click();
+
+	reloadTexts();
 }
 
-export async function hideLoader(){
+export async function hide(){
 	loader.removeAttribute("active");
-	window.onbeforeunload = () => {}
+
 	setTimeout(() => {
 		loader.remove();
 	}, 1000);
