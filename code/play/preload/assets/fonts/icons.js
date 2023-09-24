@@ -8,13 +8,20 @@ export default function(assetDIV=HTMLDivElement){
 	fontLetterAssets.setAttribute("id", "font-icons");
 	assetDIV.appendChild(fontLetterAssets);
 
+	saveImage("../../code/assets/PIXLUS-logo-small.png", fontLetterAssets);
+	saveImage("../../code/assets/PIXLUS-logo-large.png", fontLetterAssets);
+
 	for(let i = 0; i < Object.keys(fontIcons).length; i++){
 		let imageData = fontIcons[Object.keys(fontIcons)[i]].img;
 
-		let imageElement = document.createElement("img");
-		imageElement.setAttribute("src", `../../code/assets/UI/images/fonts/${imageData.source}`);
-		fontLetterAssets.appendChild(imageElement);
+		saveImage(`../../code/assets/UI/images/fonts/${imageData.source}`, fontLetterAssets);
 
 	}
 
+}
+
+function saveImage(source="", div=HTMLDivElement){
+	let imageElement = document.createElement("img");
+	imageElement.setAttribute("src", source);
+	div.appendChild(imageElement);
 }

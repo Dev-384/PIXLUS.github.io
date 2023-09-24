@@ -1,0 +1,34 @@
+{
+	"block": {
+		"": {
+			"img": {
+				"source": "Stone/hidden_stone.png",
+				"width": 16,
+				"height": 16,
+				"tileCoords": {
+					"X": 0,
+					"Y": 0
+				}
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","O"],
+					["O","O","O"],
+					["O","O","O"]
+				],
+				"standing": {
+					"img":  {
+						"source": "Nature/hole.png",
+						"width": 16,
+						"height": 16,
+						"tileCoords": {
+							"X": 0,
+							"Y": 0
+						}
+					}
+				},
+				"action": " open menu ('paused') "
+			}
+		}
+	}
+}
