@@ -1,0 +1,26 @@
+{
+	"player": {
+		"animations": {
+			"idle": {
+				"left": "idle/left.png",
+				"right": "idle/right.png",
+
+				"animationLength": 4,
+				"width": 16,
+				"height": 16
+			},
+			"walk": {
+				"left": "walk/left.png",
+				"right": "walk/right.png",
+
+				"animationLength": 6,
+				"width": 16,
+				"height": 16
+			},
+			"run": {
+				"left": [],
+				"right": []
+			}
+		}
+	}
+}

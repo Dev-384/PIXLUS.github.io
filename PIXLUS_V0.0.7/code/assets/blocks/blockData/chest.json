@@ -1,0 +1,44 @@
+{
+	"block": {
+
+		"": {
+			"img": {
+				"source": "chest.png",
+				"animationLength": 8,
+				"width": 32,
+				"height": 32,
+				"tileCoords": {
+					"X": 0,
+					"Y": 0
+				}
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","O"],
+					["O","O","O"],
+					["O","O","O"]
+				],
+				"action": " set block ( 'chest:opened' ) ; add item to player ( 'grass' ) "
+			}
+		},
+		"opened": {
+			"img": {
+				"source": "chest.png",
+				"animationLength": 0,
+				"width": 32,
+				"height": 32,
+				"tileCoords": {
+					"X": 160,
+					"Y": 0
+				}
+			},
+			"aspects": {
+				"bounds": [
+					["O","O","O"],
+					["O","O","O"],
+					["O","O","O"]
+				]
+			}
+		}
+	}
+}

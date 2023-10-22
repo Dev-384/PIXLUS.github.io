@@ -1,0 +1,22 @@
+{
+	"block": {
+		"": {
+			"img": {
+				"source": "campfire.png",
+				"width": 16,
+				"height": 16,
+				"tileCoords": {
+					"X": 32,
+					"Y": 16
+				}
+			},
+			"aspects": {
+				"bounds": [
+					["X","O","X"],
+					["X","O","X"],
+					["X","O","X"]
+				]
+			}
+		}
+	}
+}
